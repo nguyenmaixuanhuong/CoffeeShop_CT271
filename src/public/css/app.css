@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Oswald",'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+h3 {
+  color: #e7b45a;
+  font-weight: 700; }
+
+.form-input {
+  border-radius: 20px;
+  padding: 12px 25px;
+  box-shadow: 0px 0px 7px 0px rgba(37, 37, 37, 0.1);
+  border: none; }
+
+.btn-list:hover {
+  transition: all 0.5s ease-in;
+  background-color: #5d3b01; }
+
+.updateProduct {
+  background-color: #0051c2; }
+
+.updateProduct:hover {
+  background-color: #0265ef !important; }
+
+.deleteProduct:hover {
+  transition: all 0.4s ease-in;
+  background-color: #db0303 !important; }
+  .deleteProduct:hover i {
+    transition: all 0.2s ease-in;
+    color: white !important; }
+
+#upload {
+  opacity: 0; }
+
+.image-area {
+  padding: 1rem;
+  position: relative; }
+
+.image-area img {
+  z-index: 2;
+  position: relative; }
+
+.navHomepage {
+  padding: 5px; }
+
+.cart {
+  color: #e7b45a; }
+
+a {
+  color: black; }
+
+.register {
+  text-decoration: none; }
+
+.header {
+  background-color: rgba(18, 18, 18, 0.948); }
+
+.nav-link {
+  color: white;
+  padding: 0px 0px 5px 0px;
+  font-family: "Oswald",'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+.nav-link:hover {
+  transition: all 0.4s ease;
+  color: #e7b45a !important; }
+
+.logo {
+  margin: auto; }
+
+.active {
+  color: #e7b45a !important; }
+
+.search {
+  border-radius: 20px;
+  width: 10em; }

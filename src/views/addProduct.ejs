@@ -1,0 +1,104 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 col-lg-2 p-0">
+            <div class="admin p-4 bg-warning">
+                ADMIN
+            </div>
+            <div style="min-height: 100vh; background-color: rgb(52, 28, 0) ">
+                <div class="p-3 btn-list">
+                    <i class="fa-solid fa-users text-white pr-1" style="font-size: 16px;"></i>
+                    <a class=" w-100 text-white " style="text-decoration: none; " href="/admin/listusers">Danh Sách
+                        Thành Viên</a>
+                </div>
+                <div class="p-3 btn-list" >
+                    <i class="fa-solid fa-mug-saucer text-white pr-1 " style="font-size: 16px;"></i>
+                    <a class="w-100 text-white " style="text-decoration: none;" href="/admin/listproducts">Danh Sách Sản
+                        Phẩm</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-9 col-lg-10 p-0" style="background-color: rgb(248, 244, 238);">
+            <div class="p-3 text-center mt-4">
+                <h3>THÊM SẢN PHẨM MỚI</h3>
+                <a class="text-dark" href="/admin/listproducts">
+                    <i class="fa-solid fa-xmark float-right pr-4 pt-2" style="font-size: 24px;"></i>
+                </a>
+            </div>
+            <div style="width: 40%; margin: auto;">
+                <form method="post" action="/admin/addProduct" enctype="multipart/form-data">
+                    <div class="form-row align-items-center">
+                        <div class="col-auto my-1">
+                          <label class="mr-sm-2" for="inlineFormCustomSelect">Loại đồ uống</label>
+                          <select name="type" class="custom-select mr-sm-2 " style="border-radius: 15px;" id="inlineFormCustomSelect">                           
+                            <option value="1">Coffee</option>
+                            <option value="2">Milktea</option>
+                            <option value="3">Tea</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="nameProduct">Tên Sản Phẩm</label>
+                        <input name="nameProduct" type="text" class="form-control form-input" id="nameProduct" placeholder="Nhập tên sản phẩm" required>
+                      </div>
+                    <div class="form-group mt-3">
+                        <label for="priceProduct">Đơn Giá</label>
+                        <input name="priceProduct"  type="text" class="form-control form-input" onchange="fomartPrice()" id="priceProduct" placeholder="Nhập giá sản phẩm " required>
+                      </div>
+                    <div class="form-group mt-3">
+                      <label  class="d-block" for="exampleFormControlFile1">Ảnh Sản Phẩm</label>
+                      <div class="input-group  rounded-pill  shadow-sm d-block">
+                        <input id="upload" name="imageProduct" type="file" accept=".png, .jpg, .jpeg"
+                            onchange="readURL(this);" class="form-control d-none" required>
+                        <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose
+                            file</label>
+                        <div class="input-group-append">
+                            <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i
+                                    class="fa fa-cloud-upload mr-2 text-muted"></i><small
+                                    class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                        </div>
+                    </div>
+                    <!-- Uploaded image area-->
+                    <div class="image-area mt-4  p-0"><img id="imageResult" src="#" alt=""
+                            class="img-fluid rounded shadow-sm d-block"></div>
+                      <span class="text-success"><%= message%></span>
+                    </div>
+                    <div class="form-check pl-0">
+                        <button type="submit" class="btn form-input mt-2 font-weight-bold text-white" style="background-color: #e39f29;" >THÊM MỚI</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imageResult')
+                    .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $(function () {
+        $('#upload').on('change', function () {
+            readURL(input);
+        });
+    });
+
+
+    // SHOW UPLOADED IMAGE NAME
+    var input = document.getElementById('upload');
+    var infoArea = document.getElementById('upload-label');
+    var imageResult = document.getElementById('imageResult');
+    input.addEventListener('change', showFileName);
+    function showFileName(event) {
+        var input = event.srcElement;
+        imageResult.style.width = '20%';
+        imageResult.style.height = '30%';
+        var fileName = input.files[0].name;
+        infoArea.textContent = 'File name: ' + fileName;
+    }
+</script>
