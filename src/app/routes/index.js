@@ -1,16 +1,16 @@
 const registerRoute = require('./registerRoute')
-const siteRouter = require('./siteRoute')
 const loginRouter = require('./loginRoute')
 const productsRouter = require('./productsRoute')
-const adminRouter = require('./adminRoute')
+const userRouter = require('./userRoute')
+const productApiRouter = require('./productsApiRoute')
+const cartRouter = require('./cartRoute')
 function route(app){
-
     app.use('/register',registerRoute);
     app.use('/login',loginRouter);
-    app.use('/products',productsRouter);
-    app.use('/admin',adminRouter);
-    app.use('/',siteRouter);
-   
+    app.use('/admin/user',userRouter);
+    app.use('/admin/products',productsRouter);
+   app.use('/api',productApiRouter);
+   app.use('/cart', cartRouter);
 }
 
 module.exports = route;

@@ -1,53 +1,38 @@
 const User = require("../models/user")
 var validator = require('validator');
 var crypto = require('crypto-js');
-
+const Cart = require('../models/cart');
 class RegisterControler {
 
-  // GET /form
-  index(req, res) {
-    var message = {
-      message: '',
-      passwordError: ''
-    }
-    res.render('register', { message });
-  }
 
   add_user(req, res) {
     var password = req.body.password;
     var passwordHash = crypto.AES.encrypt(password, 'thisissecret').toString();
-    var user = [[req.body.phone, req.body.name, passwordHash]]
+    var user = [[req.body.phone, req.body.name, passwordHash,0]]
 
-    const message = {
-      message: '',
-      passwordError: '',
-      phoneError: '',
-      invalidPhone: '',
-    }
-    User.findUser(req.body.phone,(data)=>{
+    var message = '';
+    User.findUser(req.body.phone, async (data)=>{
       if(data.length > 0){
-        message.phoneError = 'Số điện thoại đã tồn tại'
-        return res.render('register', { message });
+        message = 'Số điện thoại đã tồn tại'
+        return res.status(401).send(message)
       }
       if(!validator.isMobilePhone(req.body.phone,'vi-VN')){
-        message.invalidPhone = 'Số điện thoại không hợp lệ'
-        return res.render('register', { message });
+        message = 'Số điện thoại không hợp lệ'
+         return res.status(401).send(message)
       }
       if(password.length > 20 || password.length < 6)  {
-        message.passwordError = 'Mật khẩu phải từ 6 - 20 kí tự'
-        return res.render('register', { message });
+        message = 'Mật khẩu phải từ 6 - 20 kí tự'
+         return res.status(401).send(message)
       }   
-      User.addUser([user]);
-      message.message = 'Bạn đã đăng kí tài khoản thành công'
-      return res.render('register', { message });
+      await User.addUser([user]);
+      const phone = req.body.phone;
+      await Cart.addCart(phone);
+      message = 'Bạn đã đăng kí tài khoản thành công'
+      return res.status(200).send(message)
   
    });
     
   }
-
-
-
-
 }
 
 module.exports = new RegisterControler;

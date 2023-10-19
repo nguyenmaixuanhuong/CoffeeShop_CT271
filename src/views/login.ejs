@@ -1,34 +1,49 @@
-
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <h3 class="mt-4 text-center text-uppercase ">Đăng nhập tài khoản</h3>
-                    <form class=" mt-5" method="post" action="/login/check">                     
-                        <div class="form-group">
-                            <!-- <label for="phone" class="font-weight-bold pl-3">Số điện thoại:</label> -->
-                            <input type="text" class="form-control form-input " name="phone" id="phone" aria-describedby="phone"
-                                placeholder="Nhập số điện thoại" required>
-                               
-                        </div>
-                        <div class="form-group">
-                            <!-- <label for="password " class="font-weight-bold pl-3">Mật khẩu:</label> -->
-                            <input type="password" class="form-control form-input mb-2" name="password" id="password"
-                                placeholder="Nhập mật khẩu" required>         
-                                <span class="pl-4 text-danger"><%= message.message %></span>
-                                <span class="pl-4 text-danger"><%= message.passwordError %></span>
-                                <span class="pl-4 text-danger"><%= message.invalidPhone %></span>
-                        </div>
-                            <div class="form-check pl-0">
-                                <button type="submit" class="btn w-100 form-input mt-2 font-weight-bold text-white" style="background-color: #e39f29;" >ĐĂNG NHẬP</button>
-                            </div>
-                            <div class="pl-0 mt-2 text-center">
-                                <p class="d-inline">Bạn chưa có tài khoản ?</p>
-                                <a href="/register" class="d-inline text-danger"> Đăng kí </a>
-                            </div>
-                    
-                    </form>
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6 p-5" style="background-color: rgba(212, 212, 212, 0.875); border-radius: 10px; min-height: 400px;" >
+            <h3 class="mt-1 text-center text-uppercase " style="color: rgb(35, 98, 104);">Đăng nhập tài khoản</h3>
+            <form class="mt-5" method="post" action="/login/check">
+                <div class="form-group mb-4">
+                    <input type="text" class="form-control form-input " name="phone" id="phone" aria-describedby="phone"
+                        placeholder="Nhập số điện thoại" required>
                 </div>
-            </div>
+                <div class="form-group mt-4">
+                    <input type="password" class="form-control form-input mb-3" name="password" id="password"
+                        placeholder="Nhập mật khẩu" required>
+                    <div>
+                        <input class="" type="checkbox" onclick="showPassword()"><span> Show Password</span>
+                    </div>
+                    <div class="text-center">
+                        <span class=" text-danger">
+                            <%= message.message %>
+                        </span>
+                        <span class=" text-danger">
+                            <%= message.passwordError %>
+                        </span>
+                        <span class=" text-danger">
+                            <%= message.invalidPhone %>
+                        </span>
+                        <span class=" text-danger">
+                            <%= message.notAllowed %>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-check pl-0">
+                    <button type="submit" class="btn w-100 form-input font-weight-bold text-white"
+                        style="background-color: #009b98;">ĐĂNG NHẬP</button>
+                </div>
+            </form>
         </div>
-        
-   >
+    </div>
+</div>
+<script>
+    const password = document.getElementById("password");
+    showPassword = function () {
+        if (password.type == "password") {
+            password.type = "text";
+        }
+        else {
+            password.type = "password";
+        }
+    }
+</script>

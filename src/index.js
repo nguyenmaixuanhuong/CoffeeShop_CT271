@@ -6,8 +6,11 @@ const expressLayouts = require('express-ejs-layouts')
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 var methodOverride = require('method-override')
+const cors = require('cors')
 // express trả về 1 đối tượng, là đại diện để xây dựng trang website
 const app = express()
+app.use(cors());
+app.options('*',cors());
 app.use(methodOverride('_method'))
 app.use(express.json())
 app.use(express.urlencoded({
@@ -24,6 +27,7 @@ app.use(expressLayouts)
 app.set('view engine', 'ejs');
 app.set('layout','./layouts/main');
 app.set('views', path.join(__dirname, "views"));
+
 // Route init
 route(app);
 

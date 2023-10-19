@@ -1,94 +1,117 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-3 col-lg-2 p-0 ">
-            <div class="admin p-4 bg-warning">
-                ADMIN
-            </div>
-            <div style=" background-color: rgb(52, 28, 0); min-height: 100vh; ">
-                <div class="p-3 btn-list">
-                    <i class="fa-solid fa-users text-white pr-1" style="font-size: 16px;"></i>
-                    <a class=" w-100 text-white p-3" style="text-decoration: none; " href="/admin/listusers">Danh Sách
-                        Thành Viên</a>
-                </div>
-                <div class="p-3 btn-list " style="background-color: #815100b3;">
-                    <i class="fa-solid fa-mug-saucer text-white pr-1 " style="font-size: 16px;"></i>
-                    <a class="w-100 text-white p-3" style="text-decoration: none;" href="/admin/listproducts">Danh Sách
-                        Sản Phẩm</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-9 col-lg-10 p-0" style="background-color: rgb(248, 244, 238); min-height: 100vh;">
-            <div class="text-center" style="padding: 1.2rem;">
-                <h3 style="display: inline;"> DANH SÁCH SẢN PHẨM</h3>
-                <a class="text-dark float-right pr-4 pt-2" style="text-decoration: none; font-weight: 600;"
-                    href="/admin/pageAddproduct">
-                    THÊM MỚI
-                    <i class="fa-solid fa-circle-plus " style="font-size: 24px;"></i>
-                </a>
-            </div>
-            <table class="table table-striped p-4 border ">
-                <thead class="thead-dark">
-                    <tr class="text-center">
-                        <th scope="col">STT</th>
-                        <th scope="col">TÊN SẢN PHẨM</th>
-                        <th scope="col">GIÁ</th>
-                        <th scope="col">HÌNH ẢNH</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% data.forEach((product, i)=> {%>
-                        <tr class="text-center ">
-                            <th class="align-middle">
-                                <%= i+1 %>
-                            </th>
-                            <td class="text-left align-middle" style="padding-left: 10%;">
-                                <%= product.productName %>
-                            </td>
-                            <td class="text-center align-middle">
-                                <%= product.productPrice %>
-                            </td>
-                            <td class="text-center align-middle">
-                                <img src="<%= product.productImage %>" style="height: 100px; width: 100px;" alt="">
-                            </td>
-                            <td class="align-middle text-center">
-                                <a href="/admin/pageUpdateproduct/<%= product.idproduct %>" class=" py-1 updateProduct btn text-white "><i
-                                        class="fa-solid fa-pen-to-square " style="font-size: 14px; "></i>Sửa</a>
-                                <a type="button" class="btn bg-danger text-white deleteProduct py-1" data-toggle="modal"
-                                    data-target="#exampleModal">
-                                    <i class="fa-solid fa-trash-can" style="font-size:14px;"></i> Xóa
-                                </a>
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body text-center">
-                                                <p> Bạn có chắc là muốn xóa sản phẩm này không?</p>
-                                            </div>
-                                            <div class="modal-footer ">
-                                                <button type="button" class="btn btn-white mr-3 font-weight-bold"
-                                                    data-dismiss="modal">No</button>
-                                                <a href="/admin/deleteProduct/<%= product.idproduct%>"
-                                                    class="btn bg-dark text-white "
-                                                    id="<%= product.idproduct %>">Yes</a>
-                                            </div>
+<div class="col-9 col-lg-10 p-0 listproducts" style="background-color: rgb(248, 244, 238); min-height: max-content;">
+    <div class="text-center" style="padding: 1.2rem;">
+        <h3 style="display: inline;"> DANH SÁCH SẢN PHẨM</h3>
+        <a class="text-dark float-right pr-4 pt-2" style="text-decoration: none; font-weight: 600;"
+            href="/admin/products/pageAddproduct">
+            THÊM MỚI
+            <i class="fa-solid fa-circle-plus " style="font-size: 24px;"></i>
+        </a>
+    </div>
+    <div >
+        <table class="table table-striped p-4 border ">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th scope="col">STT</th>
+                    <th scope="col">TÊN SẢN PHẨM</th>
+                    <th scope="col">GIÁ</th>
+                    <th scope="col">HÌNH ẢNH</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach((product, i)=> {%>
+                    <tr class="text-center ">
+                        <th class="align-middle">
+                            <%= i+1 %>
+                        </th>
+                        <td class="text-left align-middle" style="padding-left: 10%;">
+                            <%= product.productName %>
+                        </td>
+                        <td class="text-center align-middle">
+                            <span>Size M : <%= product.productPricesizeM %> <br> </span>
+                            <span>Size L : <%= product.productPricesizeL %> </span>
+                        </td>
+                        <td class="text-center align-middle">
+                            <img src="/img/products/<%= product.productImage %>" style="height: 80px; width: 80px;" alt="">
+                        </td>
+                        <td class="align-middle text-center">
+                            <a href="/admin/products/pageUpdateproduct/<%= product.idproduct %>?page=0"
+                                class=" py-1 updateProduct btn text-white "><i class="fa-solid fa-pen-to-square "
+                                    style="font-size: 14px; "></i>Sửa</a>
+                            <button data-id="<%= product.idproduct%>" type="button"
+                                class="btn bg-danger text-white deleteProduct py-1" data-toggle="modal"
+                                data-target="#exampleModal">
+                                <i class="fa-solid fa-trash-can" style="font-size:14px;"></i> Xóa
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <p> Bạn có chắc là muốn xóa sản phẩm này không?</p>
+                                        </div>
+                                        <div class="modal-footer ">
+                                            <button type="button" class="btn btn-white mr-3 font-weight-bold"
+                                                data-dismiss="modal">No</button>
+                                            <button class="btn bg-dark text-white " type="button" id="btn_delete">Yes
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
-                            </td>
-                        </tr>
-                        <% }) %>
-
-                </tbody>
-            </table>
-        </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
     </div>
+    <!-- form delete hidden -->
+    <form method="post" name="delete-form">
+    </form>
+    <nav aria-label="Page navigation example" class="d-flex justify-content-center paginationNav ">
+        <ul class="pagination ">
+            <li class="page-item ">
+                <a class="page-link text-dark" href="/admin/products/listproducts/?page=<%= page > 1 ? page -1 : 1 %>"
+                    aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <%for(i=1 ; i <=totalPage ; i++) {%>
+                <li class="page-item "><a class="page-link text-dark" href="/admin/products/listproducts/?page=<%=i%>">
+                        <%=i%>
+                    </a></li>
+                <%} %>
+                    <li class="page-item ">
+                        <a class="page-link text-dark"
+                            href="/admin/products/listproducts/?page=<%= page < totalPage ?page + 1 :page%>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+        </ul>
+    </nav>
 </div>
+
+
+<script>
+
+    var deleteForm = document.forms['delete-form'];
+    var btn_delete = document.getElementById('btn_delete');
+    var productID;
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        productID = button.data('id')
+        console.log(productID);
+    })
+
+    btn_delete.onclick = function () {
+        deleteForm.action = `/admin/products/deleteProduct/${productID}?page=0`;
+        deleteForm.submit();
+    }
+</script>

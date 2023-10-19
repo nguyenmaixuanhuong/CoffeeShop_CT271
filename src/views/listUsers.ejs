@@ -1,43 +1,52 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-3 col-lg-2 p-0" >
-            <div class="admin p-4 bg-warning">
-                ADMIN
-            </div>
-            <div style="min-height: 100vh; background-color: rgb(52, 28, 0) ">
-                <div class="p-3 btn-list" style="background-color: #815100b3;">
-                    <i class="fa-solid fa-users text-white pr-1" style="font-size: 16px;"></i>
-                    <a class=" w-100 text-white p-3" style="text-decoration: none; " href="/admin/listusers">
-                        Danh Sách Thành Viên</a>
-                </div>
-                <div class="p-3 btn-list">
-                    <i class="fa-solid fa-mug-saucer text-white pr-1 " style="font-size: 16px;"></i>
-                    <a class="w-100 text-white p-3" style="text-decoration: none;" href="/admin/listproducts">Danh Sách Sản Phẩm</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-9 col-lg-10 p-0" style="background-color: rgb(248, 244, 238); min-height: 100vh;">
-            <div class="p-3 text-center"> 
-                <h3> DANH SÁCH KHÁCH HÀNG</h3>
-            </div>
-            <table class="table table-striped p-4 border">
-                <thead class="thead-dark">
-                    <tr class="text-center">
-                        <th scope="col">STT</th>
-                        <th scope="col">TÊN KHÁCH HÀNG</th>
-                        <th scope="col">SỐ ĐIỆN THOẠI</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% data.forEach((user, i) => {%>
-                        <tr class="text-center ">
-                            <th><%= i+1 %></th>
-                            <td class="text-left" style="padding-left: 16%;"><%= user.username %></td>
-                            <td><%= user.sdt %></td>
-                        </tr>
-                    <% }) %>
-                </tbody>
-            </table>
-        </div>
+<div class="col-9 col-lg-10 p-0 listusers" style="background-color: rgb(248, 244, 238); min-height: max-content;">
+    <div class="p-3 text-center">
+        <h3> DANH SÁCH KHÁCH HÀNG</h3>
     </div>
+    <div >
+        <table class="table table-striped p-3 border">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th scope="col">STT</th>
+                    <th scope="col">TÊN KHÁCH HÀNG</th>
+                    <th scope="col">SỐ ĐIỆN THOẠI</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% data.forEach((user, i)=> {%>
+                    <tr class="text-center ">
+                        <th style="padding: 15px;">
+                            <%= i+1 %>
+                        </th>
+                        <td class="text-left " style="padding-left: 18%;">
+                            <%= user.username %>
+                        </td>
+                        <td>
+                            <%= user.sdt %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation example" class="d-flex justify-content-center paginationNav ">
+        <ul class="pagination ">
+            <li class="page-item ">
+                <a class="page-link text-dark" href="/admin/user/listusers/?page=<%= page > 1 ? page -1 : 1 %>"
+                    aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <%for(i=1 ; i <=totalPage ; i++) {%>
+                <li class="page-item "><a class="page-link text-dark" href="/admin/user/listusers/?page=<%=i%>">
+                        <%=i%>
+                    </a></li>
+                <%} %>
+                    <li class="page-item ">
+                        <a class="page-link text-dark"
+                            href="/admin/user/listusers/?page=<%= page < totalPage ?page + 1 :page%>" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+        </ul>
+    </nav>
 </div>

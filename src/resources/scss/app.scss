@@ -66,7 +66,12 @@ h3 {
 //     background-color: rgba(82, 56, 35, 0.929);
 // }
 .cart{  
+
+    padding-top: 10px;
+}
+.cart:hover{
     color: $primary-color;
+     transition: all 0.4s ease;
 }
 a{
     color: black;
@@ -75,11 +80,13 @@ a{
 .register{
     text-decoration: none;
 }
+
 .header{
-    background-color: rgba(18, 18, 18, 0.948);
+    background-color: rgba(255, 236, 228, 0.948);
 }
 .nav-link{
-    color: white;
+    color: #545454;
+    font-weight: 700;
     padding: 0px 0px 5px 0px;
     font-family:"Oswald",'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;;
 }
@@ -96,4 +103,28 @@ a{
 .search{
      border-radius: 20px;
      width: 10em;
+}
+.listusers .listproducts{
+    flex-direction: column;
+    flex: 1 0 auto;
+}
+.paginationNav{
+    flex-shrink: 0;
+}
+.footer {
+    background-color: #545454;;
+    position: relative;
+    overflow: hidden;
+}
+.footer::before{
+    position: absolute;
+    width: 1200px;
+    height: 1200px;
+    top: -280px;
+    left: 50%;
+    margin-left: -600px;
+    content: '';
+    background: transparent url("https://bizweb.dktcdn.net/100/485/241/themes/911577/assets/trongdong.png?1688627722165") no-repeat center center;
+    background-size: 100% auto;
+    opacity: .3;
 }
