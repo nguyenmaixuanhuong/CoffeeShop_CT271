@@ -7,7 +7,7 @@
             <i class="fa-solid fa-circle-plus " style="font-size: 24px;"></i>
         </a>
     </div>
-    <div >
+    <div>
         <table class="table table-striped p-4 border ">
             <thead class="thead-dark">
                 <tr class="text-center">
@@ -28,45 +28,56 @@
                             <%= product.productName %>
                         </td>
                         <td class="text-center align-middle">
-                            <span>Size M : <%= product.productPricesizeM %> <br> </span>
-                            <span>Size L : <%= product.productPricesizeL %> </span>
+                            <span>Size M : <%= new Intl.NumberFormat() .format(product.productPricesizeM)
+                                    .replaceAll(",", "." ) %> <br>
+                            </span>
+                            <span>Size L : <%= new Intl.NumberFormat() .format(product.productPricesizeL)
+                                    .replaceAll(",", "." ) %> <br>
+                            </span>
                         </td>
                         <td class="text-center align-middle">
-                            <img src="/img/products/<%= product.productImage %>" style="height: 80px; width: 80px;" alt="">
+                            <img src="/img/products/<%= product.productImage %>" style="height: 80px; width: 80px;"
+                                alt="">
                         </td>
                         <td class="align-middle text-center">
-                            <a href="/admin/products/pageUpdateproduct/<%= product.idproduct %>?page=0"
-                                class=" py-1 updateProduct btn text-white "><i class="fa-solid fa-pen-to-square "
-                                    style="font-size: 14px; "></i>Sửa</a>
-                            <button data-id="<%= product.idproduct%>" type="button"
-                                class="btn bg-danger text-white deleteProduct py-1" data-toggle="modal"
-                                data-target="#exampleModal">
-                                <i class="fa-solid fa-trash-can" style="font-size:14px;"></i> Xóa
-                            </button>
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body text-center">
-                                            <p> Bạn có chắc là muốn xóa sản phẩm này không?</p>
-                                        </div>
-                                        <div class="modal-footer ">
-                                            <button type="button" class="btn btn-white mr-3 font-weight-bold"
-                                                data-dismiss="modal">No</button>
-                                            <button class="btn bg-dark text-white " type="button" id="btn_delete">Yes
-                                            </button>
+                                <% if(product.status==0){ %>
+                                <a href="/admin/products/pageUpdateproduct/<%= product.idproduct %>?page=0"
+                                    class=" py-1 updateProduct btn text-white "><i class="fa-solid fa-pen-to-square "
+                                        style="font-size: 14px; "></i>Sửa</a>
+                                <button data-id="<%= product.idproduct%>" type="button"
+                                    class="btn bg-danger text-white deleteProduct py-1" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                    <i class="fa-solid fa-trash-can" style="font-size:14px;"></i> Xóa
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Xác nhận</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                <p> Bạn có chắc là muốn xóa sản phẩm này không?</p>
+                                            </div>
+                                            <div class="modal-footer ">
+                                                <button type="button" class="btn btn-white mr-3 font-weight-bold"
+                                                    data-dismiss="modal">No</button>
+                                                <button class="btn bg-dark text-white " type="button"
+                                                    id="btn_delete">Yes
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
+                                <%} else{%>
+                                    <p>Ngừng Bán</p>
+                                <%} %>
+                            </td>
                     </tr>
                     <% }) %>
             </tbody>
@@ -90,7 +101,8 @@
                 <%} %>
                     <li class="page-item ">
                         <a class="page-link text-dark"
-                            href="/admin/products/listproducts/?page=<%= page < totalPage ?page + 1 :page%>" aria-label="Next">
+                            href="/admin/products/listproducts/?page=<%= page < totalPage ?page + 1 :page%>"
+                            aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
@@ -100,7 +112,6 @@
 
 
 <script>
-
     var deleteForm = document.forms['delete-form'];
     var btn_delete = document.getElementById('btn_delete');
     var productID;

@@ -6,7 +6,6 @@ class CartController {
         Cart.findCart([req.params.phone], (data) => {
             if(data) {
                 res.send(data);
-                console.log(data);
             }
             else {
                 res.send("Không tìm thấy cart này");
@@ -22,13 +21,17 @@ class CartController {
                 const price = data[0].totalprice + req.body.totalprice;
                 const productUpdate = [number , req.body.note,price,req.body.idcart, req.body.idproduct, req.body.size]
                 Cart.updateCartDetails(productUpdate,result =>{
-                    if(result)  res.status(200).send('Them vao gio hang thanh cong')
+                    if(result)  {
+                        return  res.status(200).send("Them vao gio hang thanh cong")
+                        
+                    }
                 })
             }
             else{
                 const cartdetails = [[req.body.idcart, req.body.idproduct, req.body.size, req.body.number, req.body.note, req.body.totalprice]];
                 Cart.addCartDetails([cartdetails],(result)=>{
-                    res.status(200).send('Them vao gio hang thanh cong')
+                   return res.status(200).send("Them vao gio hang thanh cong")
+                
                 })
             }
         })
@@ -42,10 +45,9 @@ class CartController {
    async deleteCartDetail(req, res){
         console.log(req.query);
     const cartDetail = [req.query.idcart, req.query.idproduct, req.query.size];
-    Cart.deleteCartDetail(cartDetail,(result)=>{
-        res.status(200).send(result);
-    })
-   }
+    await Cart.deleteCartDetail(cartDetail);
+    res.status(200).send("Xoa san pham trong gio hang")
+    }
 
 }
 

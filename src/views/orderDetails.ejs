@@ -1,0 +1,46 @@
+<div class="col-9 col-lg-10 p-0 listusers px-5" style="background-color: rgb(248, 244, 238); min-height: max-content;">
+    <div class="text-center" style="padding: 1.2rem;">
+        <h3 style="display: inline;"> Chi Tiết Hóa Đơn</h3>
+        <a class="text-danger float-right pr-4 pt-2 h6 " style="text-decoration: none; font-weight: 600;"
+            href="/admin/order/listorders">
+            Trở Về
+            <i class="fa-solid fa-caret-left h6"></i>
+        </a>
+    </div>
+    <div class=" w-100 font-weight-bold" style="justify-content: space-between;">
+        <div class="card card-body p-0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="pl-5">Sản phẩm</th>
+                        <th class="text-center">Size</th>
+                        <th class="text-center">Số lượng</th>
+                        <th class="text-center">Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach((orderItem)=> {%>
+                        <tr style="line-height: 100px;">
+                            <td class="pl-5 d-flex ">
+                                <img src="/img/products/<%= orderItem.productImage %>" style="width: 100px;" alt="">
+                                <p class="ml-4">
+                                    <%= orderItem.productName %>
+                                </p>
+                            </td>
+                            <td class="text-center">
+                                <%= orderItem.size %>
+                            </td>
+                            <td class="text-center">
+                                <%= orderItem.number %>
+                            </td>
+                            <td class="text-center pr-5">
+                                <%= new Intl.NumberFormat() .format(orderItem.price) .replaceAll(",", "." ) %>đ
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

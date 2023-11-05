@@ -40,10 +40,9 @@ class Cart{
             result(data);
         })
     }
-    deleteCartDetail = async(product,result) =>{
+    deleteCartDetail = async(product) =>{
         db.query("DELETE FROM `coffee_shop`.`cartdetails` WHERE (`idcart` = ?) and (`idproduct` = ?) and (`size` = ?);",product,function(err,data){
-            if(err){ result(err); }
-            result(data);
+            if(err){ console.log(err); }
         })
     }
 }

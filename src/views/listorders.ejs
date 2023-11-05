@@ -1,0 +1,56 @@
+<div class="col-9 col-lg-10 p-0 listusers px-5" style="background-color: rgb(248, 244, 238); min-height: max-content;">
+    <div class="p-3 text-center">
+        <h3> DANH SÁCH HÓA ĐƠN</h3>
+    </div>
+    <% data.forEach((order)=> {%>
+        <div class="card mb-4 ">
+            <div class="card-header font-weight-bold ">
+                <%= order.date %>
+            </div>
+            <div class="card-body p-0">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="pl-5">Tên khách hàng</th>
+                            <th class="text-center">Số điện thoại</th>
+                            <th class="text-center">Địa chỉ</th>
+                            <th class="text-center">Tổng Hóa Đơn</th>
+                            <th class="text-center">Trạng Thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="pl-5">
+                                <%= order.username %>
+                            </td>
+                            <td class="text-center">
+                                <%= order.sdt %>
+                            </td>
+                            <td class="text-center">
+                                <%= order.address %>
+                            </td>
+                            <td class="text-center">
+                                <%= new Intl.NumberFormat() .format(order.totalorder) .replaceAll(",", "." ) %>đ
+                            </td>
+                            <td class="text-center">
+                                <% if(order.statusorder==0){ %>
+                                    <a v-if="order.statusOrder == 0" href="/admin/order/confirmorder/<%=order.idorder%>"  class="btn btn-dark">Xác Nhận</a>
+                                    <% }else{%>
+                                        <p class="text-secondary" v-else>Đã xác nhận</p>
+                            </td>
+                            <%}%>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer d-flex justify-content-between font-weight-bold">
+                <div class=" w-100" style="justify-content: space-between;">
+                    <a href="/admin/order/orderdetails/<%=order.idorder%>" class="btn btn-primary" type="button">
+                        Xem chi tiết
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <% }) %>
+</div>

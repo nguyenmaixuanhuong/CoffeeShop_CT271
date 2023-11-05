@@ -57,35 +57,15 @@ class ProductsController {
         var message = '';
         let page = req.query.page;
         page = page > 0 ? Math.floor(page) : 1;
-        try {
-            Product.get_product(id, (data) => {
-              
-                var imgName = data[0].productImage;
-                const filepath = path.join(root.path, 'src/public/img/products' + '/' + imgName)
-                const filepathFE = path.join('/PROJECT-CT271_FE/project-ct271_fe/public/img/products' + '/' + imgName)
-                fs.unlink(filepath, function (err) {
-                    if (err) throw err;
-                    else {
-                        console.log('File deleted!');
-                    }
-                });
-                fs.unlink(filepathFE, function (err) {
-                    if (err) throw err;
-                    else {
-                        console.log('File deleted!');
-                    }
-                });
+        try { 
                 Product.delete_product(id);
                 Product.get_all_products(page, (data, totalPage) => {
                     res.render('listProducts', { layout: './layouts/admin_main', data: data, totalPage: totalPage, page: page });
                 });
-            })
         }
         catch (err) {
             message = 'Đã có lỗi xảy ra  vui lòng thử lại'
-            Product.get_all_products(page, (data, totalPage) => {
-                res.render('listProducts', { layout: './layouts/admin_main', data: data, totalPage: totalPage, page: page });
-            });
+            res.redirect("/admin/products/listproducts");
         }
 
     }
@@ -116,9 +96,6 @@ class ProductsController {
         if (!image) {
             await Product.update_product_noImg(productName, description, idType, productPricesizeM, productPricesizeL, id);
            var message = "Cập nhật sản phẩm thành công";
-            await Product.get_all_products(page, (data, totalPage) => {
-                res.render('listProducts', { layout: './layouts/admin_main', data: data, totalPage: totalPage, page: page });
-            });
         }
         else {
             await Product.get_product(id, (data) => {
@@ -138,10 +115,8 @@ class ProductsController {
             image.imageProduct.mv(filepath)
             image.imageProduct.mv(filepathFE)
             message = "Cập nhật sản phẩm thành công";
-            await Product.get_all_products(page, (data, totalPage) => {
-                res.render('listProducts', { layout: './layouts/admin_main', data: data, totalPage: totalPage, page: page });
-            });
         }
+        res.redirect("/admin/products/listproducts");
     }
 
 

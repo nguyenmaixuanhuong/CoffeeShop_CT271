@@ -45,7 +45,7 @@ class Product{
     }
     // Ham xoa san pham
     delete_product = function(id){
-        db.query("DELETE FROM `coffee_shop`.`products` WHERE idproduct = ?",id,function(err){
+        db.query("UPDATE `coffee_shop`.`products` SET `status` = '1' WHERE (`idproduct` = ?);",id,function(err){
             if(err){
                console.log(err);
             }

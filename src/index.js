@@ -14,7 +14,7 @@ app.options('*',cors());
 app.use(methodOverride('_method'))
 app.use(express.json())
 app.use(express.urlencoded({
-  extended: true,
+  extended: false,
 }))
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
