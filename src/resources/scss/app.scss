@@ -66,7 +66,6 @@ h3 {
 //     background-color: rgba(82, 56, 35, 0.929);
 // }
 .cart{  
-
     padding-top: 10px;
 }
 .cart:hover{
@@ -127,4 +126,26 @@ a{
     background: transparent url("https://bizweb.dktcdn.net/100/485/241/themes/911577/assets/trongdong.png?1688627722165") no-repeat center center;
     background-size: 100% auto;
     opacity: .3;
+}
+.card {
+    margin: 16px 24px;
+    box-shadow: 2px 2px 5px rgb(223, 223, 223);
+    border: none;
+    width: 25rem;
+    padding: 16px;
+    max-height: 250px;
+    text-decoration: none !important;
+    border-radius: 30px;
+    @media (max-width:992px) {
+        width: 45%;
+    }
+}
+
+.card-body:hover {
+    background-color: rgb(236, 244, 255);
+    border-radius: 20px;
+
+}
+.card-body {
+    padding: 36px;
 }

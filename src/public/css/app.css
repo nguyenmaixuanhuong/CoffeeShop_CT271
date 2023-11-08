@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  text-decoration: none;
   font-family: "Oswald",'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 
 h3 {
@@ -28,7 +27,7 @@ h3 {
 .deleteProduct:hover {
   transition: all 0.4s ease-in;
   background-color: #db0303 !important; }
-.deleteProduct:hover i {
+  .deleteProduct:hover i {
     transition: all 0.2s ease-in;
     color: white !important; }
 
@@ -54,12 +53,13 @@ h3 {
   transition: all 0.4s ease; }
 
 a {
-  color: black; 
-  
-}
+  color: black; }
 
 .register {
   text-decoration: none; }
+
+.header {
+  background-color: rgba(255, 236, 228, 0.948); }
 
 .nav-link {
   color: #545454;
@@ -104,3 +104,23 @@ a {
   background: transparent url("https://bizweb.dktcdn.net/100/485/241/themes/911577/assets/trongdong.png?1688627722165") no-repeat center center;
   background-size: 100% auto;
   opacity: .3; }
+
+.card {
+  margin: 16px 24px;
+  box-shadow: 2px 2px 5px #dfdfdf;
+  border: none;
+  width: 25rem;
+  padding: 16px;
+  max-height: 250px;
+  text-decoration: none !important;
+  border-radius: 30px; }
+  @media (max-width: 992px) {
+    .card {
+      width: 45%; } }
+
+.card-body:hover {
+  background-color: #ecf4ff;
+  border-radius: 20px; }
+
+.card-body {
+  padding: 36px; }

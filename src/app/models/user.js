@@ -4,18 +4,28 @@ const query = util.promisify(db.query).bind(db);
 
 class User {
      get_all = async function (page, results) {
-        let limit = 10;
-        let start = (page - 1) * limit;
-        var totalRow = 0;
-        let rowData = await query("SELECT count(*) as total FROM user");
-        totalRow = rowData[0].total;
-        let totalPage = Math.ceil(totalRow / limit);
-        await db.query(`SELECT * FROM user LIMIT ${start},${limit}`, function (err, data) {
-            if (err) {
-                console.log(err);
-            }
-            results(data, totalPage);
-        });
+        if(page){
+            let limit = 10;
+            let start = (page - 1) * limit;
+            var totalRow = 0;
+            let rowData = await query("SELECT count(*) as total FROM user");
+            totalRow = rowData[0].total;
+            let totalPage = Math.ceil(totalRow / limit);
+            await db.query(`SELECT * FROM user LIMIT ${start},${limit}`, function (err, data) {
+                if (err) {
+                    console.log(err);
+                }
+                results(data, totalPage);
+            });
+        }
+        else{
+            await db.query(`SELECT * FROM user `, function (err, data) {
+                if (err) {
+                    console.log(err);
+                }
+                results(data);
+            });
+        }
 
     }
     addUser = function (new_user) {
