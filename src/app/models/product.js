@@ -15,7 +15,7 @@ class Product{
         let limit = 5;
         let start = (page - 1) * limit;
         var totalRow = 0;
-        let rowData = await query("SELECT count(*) as total FROM products");
+        let rowData = await query("SELECT count(*) as total FROM products ORDER BY idproduct DESC");
         totalRow = rowData[0].total;
         let totalPage = Math.ceil(totalRow / limit);
         await db.query(`SELECT * FROM products LIMIT ${start},${limit}`,function(err,data){

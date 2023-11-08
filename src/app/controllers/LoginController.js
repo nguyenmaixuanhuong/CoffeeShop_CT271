@@ -48,24 +48,20 @@ class LoginController {
     checkUserAPI(req, res) {
         const phone = req.body.phone;
         const password = req.body.password;    
-        var message = '';   
+        var message ="Số điện thoại hoặc mật khẩu không chính xác";   
         User.findUser(phone, (data) => {
             if(!validator.isMobilePhone(req.body.phone,'vi-VN')){
-                message = 'Số điện thoại không hợp lệ'
                 return res.status(403).send(message)
               }    
             if (data.length <= 0) {
-                message = "Số điện thoại chưa đăng kí tài khoản"
                 return res.status(403).send(message);
             }
             var bytes = crypto.AES.decrypt(data[0].password, 'thisissecret');
             var password_decode = bytes.toString(crypto.enc.Utf8);
-    
             if(password_decode !== password){
-                message = "Số điện thoại hoặc mật khẩu không chính xác"
                 return res.status(403).send(message)
             }      
-            return res.send(data);
+            return res.send({username: data[0].username, phone: data[0].sdt});
         })
     }
    

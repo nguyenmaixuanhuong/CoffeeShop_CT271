@@ -10,16 +10,15 @@ class Cart{
     findCart = async (phoneUser,result)=>{
         db.query("SELECT idcart FROM `coffee_shop`.`cart` WHERE `sdt` = ? ",phoneUser,function(err,data){
             if(err) console.log(err);
-            return result(data);
+             result(data);
         })
     }
-    addCartDetails = async(cartDetail,result) =>{
+    addCartDetails = async(cartDetail) =>{
         db.query("INSERT INTO `coffee_shop`.`cartdetails` (`idcart`, `idproduct`, `size`, `number`, `note`, `totalprice`) VALUES ? ",cartDetail,
         function(err,data){
             if(err){
-                result("error")
+               console.log(err);
             }
-            result(data);
         })
     }
     findCartDetails = async(product,result) =>{
@@ -34,8 +33,14 @@ class Cart{
             result(data);
         })
     }
-    getAllCartDetails = async(idcart,result) =>{
+    getAllCartDetailsAPI = async(idcart,result) =>{
         db.query("SELECT * FROM cartdetails c ,  products p WHERE `idcart` = ? and c.idproduct = p.idproduct ;",idcart,function(err,data){
+            if(err){ console.log(err);}
+            result(data);
+        })
+    }
+    getProductInCart = async(id,result) =>{
+        db.query("SELECT * FROM cartdetails c ,  products p WHERE c.idproduct = p.idproduct and c.idproduct = ?;",id,function(err,data){
             if(err){ console.log(err);}
             result(data);
         })
@@ -45,6 +50,7 @@ class Cart{
             if(err){ console.log(err); }
         })
     }
+    
 }
 
 module.exports = new Cart;

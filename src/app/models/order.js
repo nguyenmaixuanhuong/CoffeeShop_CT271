@@ -21,9 +21,9 @@ class Order{
             if(err) console.log(err);  
         })
     }
-    getOrderUser= async function (id, result){
-        db.query("SELECT * FROM `orderdetail` , `order` o, `products` p where`orderdetail`.ìdorder = o.idorder and `orderdetail`.idproduct = p.idproduct and sdt = ?",
-        id,function(err,data){
+    getOrderUser= async function (phone, result){
+        db.query("SELECT * FROM `order`  where sdt = ? ORDER BY idorder DESC",
+        phone,function(err,data){
             if(err) console.log(err);
             result(data);
         })

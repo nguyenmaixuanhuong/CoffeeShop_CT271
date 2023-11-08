@@ -2,6 +2,7 @@ const Product = require('../models/product')
 const bodyParser = require('body-parser');
 const path = require('path');
 const root = require('app-root-path')
+const Cart = require('../models/cart')
 var fs = require('fs');
 class ProductsController {
     index(req, res) {
@@ -116,6 +117,20 @@ class ProductsController {
             image.imageProduct.mv(filepathFE)
             message = "Cập nhật sản phẩm thành công";
         }
+        await Cart.getProductInCart(id,data=>{
+            data.forEach(item => {
+                if(item.size == 'L'){
+                    item.totalprice = item.number * productPricesizeL
+                }
+                else{
+                    item.totalprice = item.number * productPricesizeM
+                }
+                const productUpdate = [item.number ,item.note,item.totalprice,item.idcart,item.idproduct,item.size]
+                Cart.updateCartDetails(productUpdate,result =>{
+                    return;
+                })
+            });
+        })
         res.redirect("/admin/products/listproducts");
     }
 

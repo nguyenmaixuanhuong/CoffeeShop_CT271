@@ -38,12 +38,31 @@ class OrderController {
         console.log(error);
     }
    }
-
+   async getOrderUserAPI(req, res, next) {
+    try {
+        const phone = req.query.phone
+        await Order.getOrderUser(phone,data =>{
+            res.status(200).send(data);
+        })
+    } catch (error) {
+        res.status(500).send(error);
+    }
+   }
    async getOrderDetails(req, res, next) {
     try {
         const id = req.params.id;
         await Order.getOrderDetails(id,data =>{
             res.render('orderDetails', { title: 'Orders', layout: './layouts/admin_main', data: data});
+        })
+    } catch (error) {
+        console.log(error);
+    }
+   }
+   async getOrderDetailsAPI(req, res, next) {
+    try {
+        const id = req.query.id;
+        await Order.getOrderDetails(id,data =>{
+            res.status(200).send(data);
         })
     } catch (error) {
         console.log(error);
