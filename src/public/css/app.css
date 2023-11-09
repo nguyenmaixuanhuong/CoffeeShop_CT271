@@ -14,9 +14,16 @@ h3 {
   box-shadow: 0px 0px 7px 0px rgba(37, 37, 37, 0.1);
   border: none; }
 
+.btn-list {
+  font-weight: 600;
+  border-bottom: 1px solid gainsboro;
+  padding: 24px 0px 24px 16px; }
+
 .btn-list:hover {
-  transition: all 0.5s ease-in;
-  background-color: #5d3b01; }
+  background-color: #0093bcc5;
+  color: white; }
+  .btn-list:hover a {
+    color: white; }
 
 .updateProduct {
   background-color: #0051c2; }
@@ -105,7 +112,7 @@ a {
   background-size: 100% auto;
   opacity: .3; }
 
-.card {
+.overview {
   margin: 16px 24px;
   box-shadow: 2px 2px 5px #dfdfdf;
   border: none;
@@ -115,12 +122,12 @@ a {
   text-decoration: none !important;
   border-radius: 30px; }
   @media (max-width: 992px) {
-    .card {
+    .overview {
       width: 45%; } }
 
-.card-body:hover {
+.overview-body:hover {
   background-color: #ecf4ff;
   border-radius: 20px; }
 
-.card-body {
+.overview-body {
   padding: 36px; }

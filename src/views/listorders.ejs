@@ -1,6 +1,6 @@
-<div class="col-9 col-lg-10 p-0 listusers px-5" style="background-color: rgb(248, 244, 238); min-height: max-content;">
+<div class="col-9 col-lg-10 p-0 listusers px-5" style="background-color: rgb(253, 253, 253); min-height: max-content;">
     <div class="p-3 text-center">
-        <h3> DANH SÁCH HÓA ĐƠN</h3>
+        <h3> DANH SÁCH ĐƠN HÀNG</h3>
     </div>
     <% data.forEach((order)=> {%>
         <div class="card mb-4 ">
@@ -34,7 +34,7 @@
                             </td>
                             <td class="text-center">
                                 <% if(order.statusorder==0){ %>
-                                    <a v-if="order.statusOrder == 0" href="/admin/order/confirmorder/<%=order.idorder%>"  class="btn btn-dark">Xác Nhận</a>
+                                    <a v-if="order.statusOrder == 0" href="/admin/order/confirmorder/<%=order.idorder%>"  class="btn btn-info">Xác Nhận</a>
                                     <% }else{%>
                                         <p class="text-secondary" v-else>Đã xác nhận</p>
                             </td>

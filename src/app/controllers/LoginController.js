@@ -37,7 +37,7 @@ class LoginController {
                 return res.render('login', { message });
             }
             if(data[0].rule =='1'){
-                return res.render('admin',{layout: './layouts/admin_main'})
+                return res.redirect('/admin/')
             }
             else{
                 message.notAllowed = "Bạn không có quyền truy cập vào đây"
@@ -64,7 +64,9 @@ class LoginController {
             return res.send({username: data[0].username, phone: data[0].sdt});
         })
     }
-   
+   logout(req, res){
+    return res.redirect('/login');    
+   }
 
 }
 

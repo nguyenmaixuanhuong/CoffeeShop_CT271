@@ -1,26 +1,29 @@
 <div class="col-3 col-lg-2 p-0 " style="min-height: 100vh;">
-    <div class="admin p-3 bg-warning text-center d-flex " style="font-weight: 700; justify-content: space-evenly;">
-        <h3 style="color: black;"> ADMIN</h3>
+    <div class="admin py-3 bg-info  text-center d-flex " style="font-weight: 700; justify-content: space-evenly;">
+        <h3 style="color: rgb(253, 251, 251);"> ADMIN</h3>
+        <a href="/admin/logout" type="button" class="" data-toggle="tooltip" data-placement="top" title="ĐĂNG XUẤT">
+            <i class="fa-solid fa-right-from-bracket h4 pt-1 text-white"></i>
+          </a>
     </div>
-    <div style=" background-color: rgb(48, 29, 0); height: 90%;  ">
-        <div class="p-3 btn-list" id="listUser" >
-            <i class="fa-solid fa-store text-white pr-1"  style="font-size: 16px;"></i>
-            <a class=" w-100 text-white p-2" id="btn-listUser" style="text-decoration: none; " href="/admin/">OverView</a>
+    <div style=" background-color: rgb(240, 249, 252); height: 90%;  ">
+        <div class=" btn-list" id="listUser" >
+            <i class="fa-solid fa-store  pr-1"  style="font-size: 16px;"></i>
+            <a class=" w-100  px-4" id="btn-listUser" style="text-decoration: none; " href="/admin/">OverView</a>
         </div>
-        <div class="p-3 btn-list" id="listUser" >
-            <i class="fa-solid fa-users text-white pr-1" style="font-size: 16px;"></i>
-            <a class=" w-100 text-white p-2" id="btn-listUser" style="text-decoration: none; " href="/admin/user/listusers">Danh Sách
+        <div class=" btn-list" id="listUser" >
+            <i class="fa-solid fa-users  pr-1" style="font-size: 16px;"></i>
+            <a class=" w-100  p-2" id="btn-listUser" style="text-decoration: none; " href="/admin/user/listusers">Danh Sách
                 Khách Hàng</a>
         </div>
-        <div class="p-3 btn-list" id="btn-listProduct">
-            <i class="fa-solid fa-mug-saucer text-white pr-1 " style="font-size: 16px;"></i>
-            <a class="w-100 text-white p-2" id="listProduct" style="text-decoration: none;" href="/admin/products/listproducts">Quản lí 
+        <div class=" btn-list" id="btn-listProduct">
+            <i class="fa-solid fa-mug-saucer  pr-1 " style="font-size: 16px;"></i>
+            <a class="w-100  p-2" id="listProduct" style="text-decoration: none;" href="/admin/products/listproducts">Quản lí 
                 Sản Phẩm</a>
         </div>
-        <div class="p-3 btn-list" id="btn-listProduct">
-            <i class="fa-solid fa-receipt  text-white pr-2" style="font-size: 16px;"></i>
-            <a class="w-100 text-white p-2" id="listProduct" style="text-decoration: none;" href="/admin/order/listorders">Danh Sách
-                Hoá Đơn</a>
+        <div class=" btn-list" id="btn-listProduct">
+            <i class="fa-solid fa-receipt   pr-2" style="font-size: 16px;"></i>
+            <a class="w-100  p-2" id="listProduct" style="text-decoration: none;" href="/admin/order/listorders">Danh Sách
+                Đơn Hàng</a>
         </div>
     </div>
 </div>
