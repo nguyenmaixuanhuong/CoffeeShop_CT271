@@ -3,6 +3,7 @@ var validator = require('validator');
 var crypto = require('crypto-js');
 const Cart = require('../models/cart');
 class LoginController {
+    // hàm hiển thị trang login
     index(req, res) {
         const message = {
             message: '',
@@ -11,6 +12,7 @@ class LoginController {
         }
         res.render('login',{ message });
     }
+    // hàm check đăng nhập của admin 
     checkUser(req, res) {
         const phone = req.body.phone;
         const password = req.body.password;       
@@ -45,6 +47,7 @@ class LoginController {
             }
         })
     }
+    // hàm check đăng nhập của user
     checkUserAPI(req, res) {
         const phone = req.body.phone;
         const password = req.body.password;    
@@ -64,6 +67,7 @@ class LoginController {
             return res.send({username: data[0].username, phone: data[0].sdt});
         })
     }
+    // hàm đăng xuất admin
    logout(req, res){
     return res.redirect('/login');    
    }

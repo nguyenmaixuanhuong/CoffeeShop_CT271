@@ -3,6 +3,7 @@ const Cart = require('../models/cart');
 const cart = require('../models/cart');
 
 class CartController {
+    // Hàm tìm id cart của user
     getCart(req, res) {
         Cart.findCart([req.params.phone], (data) => {
             if (data) {
@@ -13,9 +14,10 @@ class CartController {
             }
         })
     }
-
+    // Hàm thêm cartdetails
     async addCartDetails(req, res) {
         const cartDetail = [req.body.idcart, req.body.idproduct, req.body.size];
+        // tìm xem đã có cartdetails chưa, nếu có sẽ cập nhật lại số lượng
         await Cart.findCartDetails(cartDetail, (data) => {
             if (data[0] != undefined) {
                 const number = data[0].number + req.body.number;
@@ -25,6 +27,7 @@ class CartController {
                     return res.status(200).send("Them vao gio hang thanh cong")
                 })
             }
+            // nếu chưa có trong cartdetails thì sẽ thêm vào
             else {
                 const cartdetails = [[req.body.idcart, req.body.idproduct, req.body.size, req.body.number, req.body.note, req.body.totalprice]];
                 Cart.addCartDetails([cartdetails]);
@@ -32,10 +35,11 @@ class CartController {
             }
         })
     }
+    // Hàm update cartdetails
     async updateCartDetails(req, res) {
         try {
             Cart.updateCartDetails(req.body, result => {
-                return res.status(200).send("Them vao gio hang thanh cong")
+                return res.status(200).send("Cập nhật thành công")
             })
         }
         catch (error) {
@@ -43,13 +47,14 @@ class CartController {
             return res.status(500).send(error)
         }
     }
+    // Hàm gửi API tất cả cartdetails của user 
     async getAllCartDetailsAPI(req, res) {
         const idcart = req.params.idcart;
         Cart.getAllCartDetailsAPI([idcart], (data) => {
             res.status(200).send(data);
         });
     }
-
+    // Hàm xóa cartdetails 
     async deleteCartDetail(req, res) {
         console.log(req.query);
         const cartDetail = [req.query.idcart, req.query.idproduct, req.query.size];

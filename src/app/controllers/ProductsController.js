@@ -4,11 +4,12 @@ const path = require('path');
 const root = require('app-root-path')
 const Cart = require('../models/cart')
 var fs = require('fs');
+
 class ProductsController {
     index(req, res) {
         res.render('admin', { title: 'AdminPage', layout: './layouts/admin_main' });
     }
-    // [GET list products]
+    // hàm lấy danh sách tất cả sản phẩm
     list_products(req, res) {
         let page = req.query.page;
         page = page > 0 ? Math.floor(page) : 1;
@@ -21,6 +22,7 @@ class ProductsController {
             }
         })
     }
+    // hàm hiển thị ra giao diện thêm sản phẩm
     page_add_product(req, res) {
         try {
             var message = '';
@@ -32,11 +34,13 @@ class ProductsController {
             res.sendError(err);
         }
     }
+    // hàm thêm sản phẩm mới
     async add_product(req, res) {
         const image = req.files;
         var message = '';
         if (!image) {
             await Product.get_all_type((types) => {
+                message= "Bạn phải thêm hình ảnh"
                 res.render('addProduct', { title: 'Add Product', layout: './layouts/admin_main', message, types });
             })
         }
@@ -53,6 +57,7 @@ class ProductsController {
             })
         }
     }
+    // hàm xóa sản phẩm
     async delete_product(req, res) {
         const id = req.params.id;
         var message = '';
@@ -60,9 +65,7 @@ class ProductsController {
         page = page > 0 ? Math.floor(page) : 1;
         try { 
                 Product.delete_product(id);
-                Product.get_all_products(page, (data, totalPage) => {
-                    res.render('listProducts', { layout: './layouts/admin_main', data: data, totalPage: totalPage, page: page });
-                });
+                res.redirect("/admin/products/listproducts");
         }
         catch (err) {
             message = 'Đã có lỗi xảy ra  vui lòng thử lại'
@@ -70,7 +73,7 @@ class ProductsController {
         }
 
     }
-
+    // hàm hiển thị giao diện chỉnh sửa sản phẩm
     page_update_product(req, res) {
         var message = ''
         const id = req.params.id;
@@ -83,7 +86,7 @@ class ProductsController {
             }
         })
     }
-
+    // hàm update sản phẩm
     async update_product(req, res) {
         const image = req.files;
         const id = req.params.id;
@@ -94,12 +97,14 @@ class ProductsController {
         const idType = req.body.type;
         let page = req.query.page;
         page = page > 0 ? Math.floor(page) : 1;
+        // khi không update hình ảnh
         if (!image) {
-            await Product.update_product_noImg(productName, description, idType, productPricesizeM, productPricesizeL, id);
+             Product.update_product_noImg(productName, description, idType, productPricesizeM, productPricesizeL, id);
            var message = "Cập nhật sản phẩm thành công";
         }
+        // khi update cả hình ảnh 
         else {
-            await Product.get_product(id, (data) => {
+             Product.get_product(id, (data) => {
                 var imgName = data[0].productImage;
                 const filepath = path.join(root.path, 'src/public/img/products' + '/' + imgName)
                 const filepathFE = path.join('D:/PROJECT-CT271_FE/project-ct271_fe/public/img/products' + '/' + imgName)
@@ -117,6 +122,7 @@ class ProductsController {
             image.imageProduct.mv(filepathFE)
             message = "Cập nhật sản phẩm thành công";
         }
+        // hàm update lại giá của sản phẩm trong cart
         await Cart.getProductInCart(id,data=>{
             data.forEach(item => {
                 if(item.size == 'L'){

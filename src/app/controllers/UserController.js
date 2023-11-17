@@ -1,7 +1,7 @@
 const User = require("../models/user")
 
 class UserController{
-     // [GET list users]
+     //hàm lấy danh sách tất cả tài khoản user
      list_users(req, res) {
         let page = req.query.page;
         page = page > 0 ? Math.floor(page) : 1;

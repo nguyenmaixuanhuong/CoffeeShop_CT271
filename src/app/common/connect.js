@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-
+// tạo kết nối database
 var connectBD =  mysql.createConnection({
     host: "localhost",
     port: 3306,
@@ -7,7 +7,7 @@ var connectBD =  mysql.createConnection({
     password: "",
     database: "coffee_shop"
 });
-
+// kết nối vào database
 connectBD.connect(function (err){
     if(err){
         console.log("Error connecting")

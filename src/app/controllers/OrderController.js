@@ -1,6 +1,8 @@
 const Order = require('../models/order');
 const Cart = require('../models/cart');
 class OrderController {
+
+    // hàm tạo 1 đơn hàng mới
     async createOrder(req, res) {
         try {
             const phone = req.query.phone;
@@ -16,6 +18,7 @@ class OrderController {
                     Order.getIdOrder(order, data => {
                         const orderId = data[0].idorder;
                         products.forEach(async product => {
+                            // thêm các sản phẩm từ giỏ hàng vào chi tiết đơn hàng và xóa giỏ hàng
                            await Order.addOrderDetails([orderId, product.idproduct, product.size,product.number, product.totalprice]);
                            await Cart.deleteCartDetail([product.idcart, product.idproduct,product.size])
                         });
@@ -29,6 +32,7 @@ class OrderController {
             res.status(500).send("Xin lỗi hệ thống Đã có lỗi xảy ra");
         }
     }
+    // hàm lấy tất cả đơn hàng trong cửa hàng
    async getAllOrders(req, res, next) {
     try {
         await Order.getAllOrders(data =>{
@@ -38,6 +42,7 @@ class OrderController {
         console.log(error);
     }
    }
+//   hàm lấy tất cả đơn hàng của 1 user
    async getOrderUserAPI(req, res, next) {
     try {
         const phone = req.query.phone
@@ -48,6 +53,7 @@ class OrderController {
         res.status(500).send(error);
     }
    }
+//    hàm lấy chi tiết đơn hàng của 1 đơn hàng
    async getOrderDetails(req, res, next) {
     try {
         const id = req.params.id;
@@ -58,6 +64,7 @@ class OrderController {
         console.log(error);
     }
    }
+//   hàm gửi API lấy chi tiết đơn hàng của 1 đơn hàng
    async getOrderDetailsAPI(req, res, next) {
     try {
         const id = req.query.id;
@@ -68,6 +75,7 @@ class OrderController {
         console.log(error);
     }
    }
+//    hàm xác nhận đơn hàng 
   async confirmOrder(req, res, next)  {
     try {
         const id = req.params.id;

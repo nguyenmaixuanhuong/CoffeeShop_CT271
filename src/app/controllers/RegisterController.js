@@ -4,7 +4,7 @@ var crypto = require('crypto-js');
 const Cart = require('../models/cart');
 class RegisterControler {
 
-
+  // hàm đăng kí tài khoản user
   add_user(req, res) {
     var password = req.body.password;
     var passwordHash = crypto.AES.encrypt(password, 'thisissecret').toString();

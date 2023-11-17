@@ -3,6 +3,7 @@ const util = require('node:util');
 const query = util.promisify(db.query).bind(db);
 
 class User {
+    // hàm lấy danh sách tất cả user trong database
      get_all = async function (page, results) {
         if(page){
             let limit = 10;
@@ -28,6 +29,7 @@ class User {
         }
 
     }
+    // hàm thêm 1 user mới vào database
     addUser = function (new_user) {
         db.query("INSERT INTO `coffee_shop`.`user` ( `sdt`, `username`, `password`,`rule`) VALUES ?", new_user, function (err) {
             if (err) {
@@ -36,6 +38,7 @@ class User {
             
         })
     }
+    // hàm lấy tất cả thông tin của user
     findUser = function (phone, result) {
         db.query("SELECT * FROM user WHERE sdt = ?", phone, function (err, data) {
             if (err) {
